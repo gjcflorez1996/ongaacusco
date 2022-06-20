@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="DBongAACusco2" Class="clqOngDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=.;Initial Catalog=DBongAACusco2;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="DBongAACusco2ConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TAuspiciador" Member="Auspiciador">
+    <Type Name="Auspiciador">
+      <Column Name="ruc" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Razon_Social" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TAuspiciador_TSesion_TAuspiciador" Member="Sesion_TAuspiciador" ThisKey="ruc" OtherKey="ruc" Type="Sesion_TAuspiciador" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TLibro" Member="Libro">
+    <Type Name="Libro">
+      <Column Name="idLibro" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Autor" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="NroCopias" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TLibro_TLibro_TSesion" Member="Libro_TSesion" ThisKey="idLibro" OtherKey="idLibro" Type="Libro_TSesion" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TLibro_TSesion" Member="Libro_TSesion">
+    <Type Name="Libro_TSesion">
+      <Column Name="idLibro" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSesion" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TLibro_TLibro_TSesion" Member="Libro" ThisKey="idLibro" OtherKey="idLibro" Type="Libro" IsForeignKey="true" />
+      <Association Name="TSesion_TLibro_TSesion" Member="Sesion" ThisKey="idSesion" OtherKey="idSesion" Type="Sesion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TMentor" Member="Mentor">
+    <Type Name="Mentor">
+      <Column Name="dni" Type="System.String" DbType="VarChar(8) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Apellido" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Especialidad" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Direccion" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TMentor_TSesion" Member="Sesion" ThisKey="dni" OtherKey="dni" Type="Sesion" />
+      <Association Name="TUsuario_TMentor" Member="Usuario" ThisKey="idUsuario" OtherKey="idUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TResiliente" Member="Resiliente">
+    <Type Name="Resiliente">
+      <Column Name="idResiliente" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoP" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="ApellidoM" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="Telefono" Type="System.String" DbType="VarChar(9) NOT NULL" CanBeNull="false" />
+      <Column Name="Correo" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Estado" Type="System.String" DbType="Char(2) NOT NULL" CanBeNull="false" />
+      <Column Name="idSeguimiento" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="idUsuario" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TResiliente_TResiliente_TSesion" Member="Resiliente_TSesion" ThisKey="idResiliente" OtherKey="idResiliente" Type="Resiliente_TSesion" />
+      <Association Name="TSeguimiento_TResiliente" Member="Seguimiento" ThisKey="idSeguimiento" OtherKey="idSeguimiento" Type="Seguimiento" IsForeignKey="true" />
+      <Association Name="TUsuario_TResiliente" Member="Usuario" ThisKey="idUsuario" OtherKey="idUsuario" Type="Usuario" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TResiliente_TSesion" Member="Resiliente_TSesion">
+    <Type Name="Resiliente_TSesion">
+      <Column Name="idSesion" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idResiliente" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TResiliente_TResiliente_TSesion" Member="Resiliente" ThisKey="idResiliente" OtherKey="idResiliente" Type="Resiliente" IsForeignKey="true" />
+      <Association Name="TSesion_TResiliente_TSesion" Member="Sesion" ThisKey="idSesion" OtherKey="idSesion" Type="Sesion" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TSeguimiento" Member="Seguimiento">
+    <Type Name="Seguimiento">
+      <Column Name="idSeguimiento" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Dias_Asistidos" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Dias_Falto" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Recaidas" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TSeguimiento_TResiliente" Member="Resiliente" ThisKey="idSeguimiento" OtherKey="idSeguimiento" Type="Resiliente" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TSesion" Member="Sesion">
+    <Type Name="Sesion">
+      <Column Name="idSesion" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="Nombre" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Fecha" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="MontoSesion" Type="System.Double" DbType="Float NOT NULL" CanBeNull="false" />
+      <Column Name="dni" Type="System.String" DbType="VarChar(8) NOT NULL" CanBeNull="false" />
+      <Association Name="TSesion_TLibro_TSesion" Member="Libro_TSesion" ThisKey="idSesion" OtherKey="idSesion" Type="Libro_TSesion" />
+      <Association Name="TSesion_TResiliente_TSesion" Member="Resiliente_TSesion" ThisKey="idSesion" OtherKey="idSesion" Type="Resiliente_TSesion" />
+      <Association Name="TSesion_TSesion_TAuspiciador" Member="Sesion_TAuspiciador" ThisKey="idSesion" OtherKey="idSesion" Type="Sesion_TAuspiciador" />
+      <Association Name="TMentor_TSesion" Member="Mentor" ThisKey="dni" OtherKey="dni" Type="Mentor" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TSesion_TAuspiciador" Member="Sesion_TAuspiciador">
+    <Type Name="Sesion_TAuspiciador">
+      <Column Name="ruc" Type="System.String" DbType="VarChar(10) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="idSesion" Type="System.String" DbType="VarChar(50) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Association Name="TSesion_TSesion_TAuspiciador" Member="Sesion" ThisKey="idSesion" OtherKey="idSesion" Type="Sesion" IsForeignKey="true" />
+      <Association Name="TAuspiciador_TSesion_TAuspiciador" Member="Auspiciador" ThisKey="ruc" OtherKey="ruc" Type="Auspiciador" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TUsuario" Member="Usuario">
+    <Type Name="Usuario">
+      <Column Name="idUsuario" Type="System.String" DbType="VarChar(100) NOT NULL" IsPrimaryKey="true" CanBeNull="false" />
+      <Column Name="ContrasenaUsuario" Type="System.String" DbType="VarChar(300) NOT NULL" CanBeNull="false" />
+      <Column Name="Tipo_Usuario" Type="System.String" DbType="VarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TUsuario_TMentor" Member="Mentor" ThisKey="idUsuario" OtherKey="idUsuario" Type="Mentor" />
+      <Association Name="TUsuario_TResiliente" Member="Resiliente" ThisKey="idUsuario" OtherKey="idUsuario" Type="Resiliente" />
+    </Type>
+  </Table>
+</Database>
